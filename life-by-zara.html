@@ -1,0 +1,483 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Life by Zara — Fine Handmade Jewelry</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400;1,9..144,500&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink: #1B1712;
+    --ink-soft: #241F19;
+    --parchment: #EDE5D3;
+    --parchment-dim: #E1D7BF;
+    --gold: #B8935A;
+    --gold-bright: #D9B478;
+    --garnet: #7A2E2E;
+    --line-dark: rgba(237,229,211,0.14);
+    --line-light: rgba(27,23,18,0.14);
+  }
+  *{margin:0;padding:0;box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    background:var(--ink);
+    color:var(--parchment);
+    font-family:'Jost', sans-serif;
+    font-weight:300;
+    -webkit-font-smoothing:antialiased;
+    overflow-x:hidden;
+  }
+  .serif{ font-family:'Fraunces', serif; }
+  a{ color:inherit; text-decoration:none; }
+  img,svg{ display:block; max-width:100%; }
+
+  /* ---------- NAV ---------- */
+  header{
+    position:fixed; top:0; left:0; right:0; z-index:50;
+    display:flex; align-items:center; justify-content:space-between;
+    padding:26px 6vw;
+    mix-blend-mode:difference;
+  }
+  .mark{
+    font-family:'Fraunces', serif;
+    font-style:italic;
+    font-weight:400;
+    font-size:1.15rem;
+    letter-spacing:0.01em;
+    color:var(--parchment);
+  }
+  nav{ display:flex; gap:36px; }
+  nav a{
+    font-size:0.85rem;
+    color:var(--parchment);
+    position:relative;
+    padding-bottom:3px;
+  }
+  nav a::after{
+    content:"";
+    position:absolute; left:0; bottom:0;
+    width:0; height:1px; background:var(--parchment);
+    transition:width 0.35s ease;
+  }
+  nav a:hover::after{ width:100%; }
+  .nav-toggle{ display:none; }
+
+  /* ---------- HERO ---------- */
+  .hero{
+    position:relative;
+    min-height:100vh;
+    display:flex;
+    align-items:flex-end;
+    padding:0 6vw 8vw 6vw;
+    overflow:hidden;
+  }
+  .hero-bg-line{
+    position:absolute; top:0; right:-6vw; height:100vh; width:auto; opacity:0.9;
+    stroke:var(--gold);
+  }
+  .hero-grid{
+    position:relative; z-index:2;
+    display:grid;
+    grid-template-columns: 1.3fr 1fr;
+    gap:4vw;
+    width:100%;
+    align-items:end;
+  }
+  .hero-word{
+    font-family:'Fraunces', serif;
+    font-weight:400;
+    line-height:0.92;
+    font-size:clamp(3.4rem, 9.5vw, 8.5rem);
+    letter-spacing:-0.01em;
+  }
+  .hero-word em{
+    font-style:italic;
+    font-weight:300;
+    color:var(--gold-bright);
+    display:block;
+  }
+  .hero-sub{
+    align-self:end;
+    border-left:1px solid var(--line-dark);
+    padding-left:24px;
+    max-width:340px;
+  }
+  .hero-sub p{
+    font-size:0.98rem;
+    line-height:1.7;
+    color:var(--parchment-dim);
+    margin-bottom:22px;
+  }
+  .hero-sub .eyebrow{
+    font-size:0.8rem;
+    color:var(--gold);
+    margin-bottom:14px;
+    display:block;
+  }
+  .btn{
+    display:inline-flex;
+    align-items:center;
+    gap:10px;
+    font-size:0.85rem;
+    color:var(--ink);
+    background:var(--gold-bright);
+    padding:13px 24px;
+    border-radius:999px;
+    transition:background 0.3s ease, transform 0.3s ease;
+  }
+  .btn:hover{ background:var(--parchment); transform:translateY(-1px); }
+  .btn-outline{
+    background:transparent;
+    color:var(--parchment);
+    border:1px solid var(--line-dark);
+  }
+  .btn-outline:hover{ border-color:var(--gold); background:transparent; color:var(--gold-bright); transform:translateY(-1px); }
+
+  .scroll-cue{
+    position:absolute; bottom:36px; left:6vw; z-index:2;
+    display:flex; align-items:center; gap:10px;
+    font-size:0.78rem; color:var(--parchment-dim);
+  }
+  .scroll-cue .dash{
+    width:28px; height:1px; background:var(--gold);
+    animation:pulse 2.4s ease-in-out infinite;
+  }
+  @keyframes pulse{ 0%,100%{opacity:0.4;} 50%{opacity:1;} }
+
+  /* ---------- SECTION SHELL ---------- */
+  section{ padding:120px 6vw; position:relative; }
+  .light{ background:var(--parchment); color:var(--ink); }
+  .rule{ height:1px; background:var(--line-dark); }
+  .light .rule{ background:var(--line-light); }
+
+  /* ---------- STORY ---------- */
+  .story{
+    display:grid;
+    grid-template-columns: 0.85fr 1.15fr;
+    gap:7vw;
+    align-items:center;
+  }
+  .story-visual{ position:relative; }
+  .story h2{
+    font-family:'Fraunces', serif;
+    font-weight:400;
+    font-size:clamp(2rem, 3.4vw, 2.9rem);
+    line-height:1.2;
+    margin-bottom:28px;
+  }
+  .story h2 i{ font-style:italic; color:var(--garnet); }
+  .story p{
+    font-size:1.02rem;
+    line-height:1.85;
+    max-width:520px;
+    color:#4a4238;
+    margin-bottom:18px;
+  }
+  .story-sign{
+    font-family:'Fraunces', serif;
+    font-style:italic;
+    font-size:1.3rem;
+    margin-top:20px;
+    color:var(--garnet);
+  }
+
+  /* ---------- COLLECTIONS ---------- */
+  .collections-head{
+    display:flex; justify-content:space-between; align-items:flex-end;
+    margin-bottom:70px; gap:40px; flex-wrap:wrap;
+  }
+  .collections-head h2{
+    font-family:'Fraunces', serif; font-weight:400;
+    font-size:clamp(2rem,3.6vw,3rem);
+    max-width:560px; line-height:1.15;
+  }
+  .collections-head p{
+    max-width:300px; color:var(--parchment-dim); font-size:0.95rem; line-height:1.7;
+  }
+  .piece-list{ display:flex; flex-direction:column; }
+  .piece{
+    display:grid;
+    grid-template-columns: 90px 1fr auto auto;
+    align-items:center;
+    gap:32px;
+    padding:34px 0;
+    border-top:1px solid var(--line-dark);
+    transition:padding-left 0.35s ease;
+  }
+  .piece:last-child{ border-bottom:1px solid var(--line-dark); }
+  .piece:hover{ padding-left:14px; }
+  .piece-icon{ width:64px; height:64px; }
+  .piece-icon svg{ stroke:var(--gold-bright); }
+  .piece-name{
+    font-family:'Fraunces', serif; font-weight:400; font-size:1.5rem;
+  }
+  .piece-name span{
+    display:block; font-family:'Jost', sans-serif; font-size:0.82rem;
+    color:var(--parchment-dim); margin-top:6px; font-weight:300;
+  }
+  .piece-material{
+    color:var(--parchment-dim); font-size:0.88rem; text-align:right; min-width:150px;
+  }
+  .piece-price{
+    font-family:'Fraunces', serif; font-style:italic; color:var(--gold-bright); font-size:1.1rem; min-width:90px; text-align:right;
+  }
+  @media (max-width:720px){
+    .piece{ grid-template-columns: 56px 1fr; row-gap:10px; }
+    .piece-material, .piece-price{ text-align:left; grid-column:2; }
+  }
+
+  /* ---------- ATELIER STRIP ---------- */
+  .atelier{
+    background:var(--ink-soft);
+    padding:100px 6vw;
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:50px;
+  }
+  .atelier-item .num{
+    font-family:'Fraunces', serif; font-style:italic; color:var(--gold);
+    font-size:1.6rem; margin-bottom:16px; display:block;
+  }
+  .atelier-item h3{
+    font-family:'Fraunces', serif; font-weight:400; font-size:1.3rem; margin-bottom:12px;
+  }
+  .atelier-item p{ color:var(--parchment-dim); font-size:0.92rem; line-height:1.7; }
+
+  /* ---------- TESTIMONIAL ---------- */
+  .testimonial{
+    text-align:center;
+    max-width:780px; margin:0 auto;
+  }
+  .testimonial blockquote{
+    font-family:'Fraunces', serif; font-style:italic;
+    font-size:clamp(1.5rem, 2.6vw, 2.1rem);
+    line-height:1.5; margin-bottom:30px;
+  }
+  .testimonial cite{
+    font-style:normal; font-size:0.85rem; color:#7a6f5e; letter-spacing:0.02em;
+  }
+
+  /* ---------- CONTACT ---------- */
+  .contact{
+    display:grid;
+    grid-template-columns:1.2fr 1fr;
+    gap:6vw;
+    align-items:start;
+  }
+  .contact h2{
+    font-family:'Fraunces', serif; font-weight:400;
+    font-size:clamp(2.2rem,4.5vw,3.6rem);
+    line-height:1.1;
+    max-width:560px;
+  }
+  .contact h2 em{ font-style:italic; color:var(--gold-bright); }
+  .contact-details{ padding-top:14px; }
+  .contact-details .row{
+    display:flex; justify-content:space-between;
+    padding:20px 0; border-top:1px solid var(--line-dark);
+    font-size:0.92rem;
+  }
+  .contact-details .row:last-child{ border-bottom:1px solid var(--line-dark); }
+  .contact-details .row span:first-child{ color:var(--parchment-dim); }
+  .contact-details .row a:hover{ color:var(--gold-bright); }
+  .contact-cta{ margin-top:40px; display:flex; gap:14px; flex-wrap:wrap; }
+
+  footer{
+    padding:40px 6vw;
+    display:flex; justify-content:space-between; align-items:center;
+    border-top:1px solid var(--line-dark);
+    font-size:0.78rem; color:var(--parchment-dim);
+    flex-wrap:wrap; gap:14px;
+  }
+  footer .fmark{ font-family:'Fraunces', serif; font-style:italic; color:var(--parchment); }
+
+  @media (max-width:860px){
+    nav{ display:none; }
+    .hero-grid{ grid-template-columns:1fr; }
+    .hero-sub{ border-left:none; padding-left:0; border-top:1px solid var(--line-dark); padding-top:24px; margin-top:24px; }
+    .story{ grid-template-columns:1fr; }
+    .collections-head{ flex-direction:column; align-items:flex-start; }
+    .atelier{ grid-template-columns:1fr; }
+    .contact{ grid-template-columns:1fr; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <span class="mark">Life by Zara</span>
+  <nav>
+    <a href="#story">Story</a>
+    <a href="#collections">Collections</a>
+    <a href="#atelier">Atelier</a>
+    <a href="#contact">Enquire</a>
+  </nav>
+</header>
+
+<!-- HERO -->
+<section class="hero">
+  <svg class="hero-bg-line" viewBox="0 0 400 900" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <circle cx="200" cy="230" r="120" stroke-width="1" opacity="0.5"/>
+    <circle cx="200" cy="230" r="132" stroke-width="0.6" opacity="0.3"/>
+    <path d="M120 230 C120 160 155 110 200 110 C245 110 280 160 280 230" stroke-width="1" opacity="0.4"/>
+    <path id="draw-line" d="M60 640 Q200 560 340 640 Q300 760 200 800 Q100 760 60 640 Z" stroke-width="1.2"
+      stroke-dasharray="1400" stroke-dashoffset="1400"/>
+    <circle cx="200" cy="640" r="4" fill="#B8935A" stroke="none" opacity="0.9"/>
+  </svg>
+
+  <div class="hero-grid">
+    <h1 class="hero-word">Jewelry
+      <em>for the life<br>you're living</em>
+    </h1>
+    <div class="hero-sub">
+      <span class="eyebrow">Zara Odén — goldsmith, Stockholm</span>
+      <p>Hand-forged rings, chains and stones, made one piece at a time in a small studio. Nothing is cast from a mould you'll see twice.</p>
+      <a href="#collections" class="btn">View the collections</a>
+    </div>
+  </div>
+
+  <div class="scroll-cue"><span class="dash"></span> Scroll</div>
+</section>
+
+<!-- STORY -->
+<section class="light" id="story">
+  <div class="story">
+    <div class="story-visual">
+      <svg viewBox="0 0 320 380" fill="none" xmlns="http://www.w3.org/2000/svg" stroke="#7A2E2E" stroke-width="1.1">
+        <ellipse cx="160" cy="150" rx="70" ry="90" />
+        <ellipse cx="160" cy="150" rx="70" ry="90" transform="rotate(35 160 150)" opacity="0.55"/>
+        <ellipse cx="160" cy="150" rx="70" ry="90" transform="rotate(-35 160 150)" opacity="0.55"/>
+        <circle cx="160" cy="150" r="14" fill="#B8935A" stroke="none"/>
+        <path d="M60 330 Q160 300 260 330" stroke-width="0.8" opacity="0.5"/>
+        <path d="M75 350 Q160 325 245 350" stroke-width="0.8" opacity="0.35"/>
+      </svg>
+    </div>
+    <div>
+      <h2>Every piece starts on <i>someone's finger,</i><br>not a spreadsheet.</h2>
+      <p>Zara trained as a silversmith in Florence before opening a one-room studio in Södermalm. Ten years on, the workshop still turns away more commissions than it takes — each piece is filed, soldered and set by hand, and no design leaves the bench until it's been worn for a week first.</p>
+      <p>Life by Zara isn't a catalogue. It's a running record of the rings people asked for when something in their life changed — an engagement, a first paycheque, a name they wanted to keep close.</p>
+      <span class="story-sign">— Zara</span>
+    </div>
+  </div>
+</section>
+
+<!-- COLLECTIONS -->
+<section id="collections">
+  <div class="collections-head">
+    <h2>A shortlist from the bench, not the whole catalogue</h2>
+    <p>Each piece below is one-of-one or made in a run of five. Ask about current availability and lead times.</p>
+  </div>
+
+  <div class="piece-list">
+
+    <div class="piece">
+      <div class="piece-icon">
+        <svg viewBox="0 0 64 64" fill="none" stroke-width="1.4"><circle cx="32" cy="38" r="18"/><circle cx="32" cy="14" r="7"/><path d="M27 10 L32 3 L37 10"/></svg>
+      </div>
+      <div class="piece-name">The Hörn ring<span>Recycled 18k gold, rose-cut diamond</span></div>
+      <div class="piece-material">One-of-one</div>
+      <div class="piece-price">kr 18,400</div>
+    </div>
+
+    <div class="piece">
+      <div class="piece-icon">
+        <svg viewBox="0 0 64 64" fill="none" stroke-width="1.4"><path d="M14 14 Q32 44 50 14" /><circle cx="32" cy="44" r="4"/></svg>
+      </div>
+      <div class="piece-name">Kedja pendant<span>Sterling silver, hand-cut chain</span></div>
+      <div class="piece-material">Run of five</div>
+      <div class="piece-price">kr 3,200</div>
+    </div>
+
+    <div class="piece">
+      <div class="piece-icon">
+        <svg viewBox="0 0 64 64" fill="none" stroke-width="1.4"><circle cx="32" cy="24" r="12"/><path d="M32 36 L32 54"/><path d="M24 54 L40 54"/></svg>
+      </div>
+      <div class="piece-name">Sten drop earrings<span>9k gold, uncut garnet</span></div>
+      <div class="piece-material">Made to order</div>
+      <div class="piece-price">kr 5,600</div>
+    </div>
+
+    <div class="piece">
+      <div class="piece-icon">
+        <svg viewBox="0 0 64 64" fill="none" stroke-width="1.4"><rect x="16" y="16" width="32" height="32" rx="4"/><path d="M16 32 L48 32 M32 16 L32 48"/></svg>
+      </div>
+      <div class="piece-name">Fyra stacking band<span>18k gold, matte finish</span></div>
+      <div class="piece-material">Open edition</div>
+      <div class="piece-price">kr 4,100</div>
+    </div>
+
+    <div class="piece">
+      <div class="piece-icon">
+        <svg viewBox="0 0 64 64" fill="none" stroke-width="1.4"><path d="M20 44 C20 20 44 20 44 44" /><circle cx="20" cy="44" r="3"/><circle cx="44" cy="44" r="3"/></svg>
+      </div>
+      <div class="piece-name">Boga cuff<span>Hammered silver</span></div>
+      <div class="piece-material">One-of-one</div>
+      <div class="piece-price">kr 6,900</div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ATELIER -->
+<section class="atelier" id="atelier">
+  <div class="atelier-item">
+    <span class="num">01</span>
+    <h3>A conversation first</h3>
+    <p>We talk through the occasion, the metal, the stone if there is one — and what the piece needs to survive daily life.</p>
+  </div>
+  <div class="atelier-item">
+    <span class="num">02</span>
+    <h3>Drawn and carved by hand</h3>
+    <p>Zara sketches and carves the wax model herself. You see a photo of it before anything is cast.</p>
+  </div>
+  <div class="atelier-item">
+    <span class="num">03</span>
+    <h3>Finished on the bench</h3>
+    <p>Filing, polishing and setting happen in the Södermalm studio — usually four to six weeks, start to finish.</p>
+  </div>
+</section>
+
+<!-- TESTIMONIAL -->
+<section class="light">
+  <div class="testimonial">
+    <blockquote>"I sent a photo of my grandmother's ring and three weeks later I was wearing a new one that felt like it had always been mine."</blockquote>
+    <cite>— Elin R., Stockholm</cite>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="contact">
+    <div>
+      <h2>Have something in <em>mind?</em></h2>
+      <div class="contact-cta">
+        <a href="mailto:hello@lifebyzara.se" class="btn">Start a commission</a>
+        <a href="#" class="btn btn-outline">Book a studio visit</a>
+      </div>
+    </div>
+    <div class="contact-details">
+      <div class="row"><span>Studio</span><span>Bondegatan 14, Södermalm, Stockholm</span></div>
+      <div class="row"><span>Email</span><a href="mailto:hello@lifebyzara.se">hello@lifebyzara.se</a></div>
+      <div class="row"><span>Hours</span><span>Tue–Fri, by appointment</span></div>
+      <div class="row"><span>Follow</span><a href="#">@lifebyzara</a></div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <span class="fmark">Life by Zara</span>
+  <span>© 2026, made by hand in Stockholm</span>
+</footer>
+
+<script>
+  window.addEventListener('load', () => {
+    const path = document.getElementById('draw-line');
+    if(path){
+      setTimeout(()=>{ path.style.transition = 'stroke-dashoffset 1.8s ease'; path.style.strokeDashoffset = '0'; }, 200);
+    }
+  });
+</script>
+
+</body>
+</html>
